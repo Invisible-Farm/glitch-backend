@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class SampleDataParserService implements FileParser {
+/**
+ * 상속받아서 사용하세요!
+ */
+public abstract class AbsDataParserService implements FileParser {
     /**
-     * 파일을 읽어와 행을 리턴합니다
+     * classpath:/static/file/ fileName.csv 파일을 읽어와 행을 리턴합니다
      * Type ArrayList<List<String>>>
      * [[val, val, val],
      * [val, val, val],
@@ -20,11 +23,11 @@ public abstract class SampleDataParserService implements FileParser {
      * @throws IOException
      * @throws InvalidFormatException
      */
-    private ArrayList<List<String>> readSampleData(String fileName) throws IOException, InvalidFormatException {
+    public ArrayList<List<String>> readSampleData(String fileName) throws IOException, InvalidFormatException {
         //반환용 리스트
         ArrayList<List<String>> ret = new ArrayList<List<String>>();
         BufferedReader br = null;
-        File file = ResourceUtils.getFile("classpath:/static/file/sample.csv");
+        File file = ResourceUtils.getFile("classpath:static/file/"+fileName);
         InputStream targetStream = new DataInputStream(new FileInputStream(file));
         try{
             br = new BufferedReader(new InputStreamReader(targetStream, "UTF-8"));
@@ -57,7 +60,11 @@ public abstract class SampleDataParserService implements FileParser {
     }
 
     /**
-     * ArrayList<List<String>>> 기반의 데이터가 어떠한 포멧형태로 파싱되어 클래스에 매핑되는지 구현하세요
+     * Type ArrayList<List<String>>>
+     * [[val, val, val],
+     * [val, val, val],
+     * [val, val, val]]
+     * 기반의 데이터가 어떠한 포멧형태로 파싱되어 클래스에 매핑되는지 구현하세요
      * @param parseDatas
      * @return
      */
@@ -72,8 +79,8 @@ public abstract class SampleDataParserService implements FileParser {
      * @throws InvalidFormatException
      */
     @Override
-    public List procParseFile(String fullFilePath) throws IOException, InvalidFormatException {
-        var p = readSampleData(fullFilePath);
+    public List procParseFile(String fileName) throws IOException, InvalidFormatException {
+        var p = readSampleData(fileName);
         var resultCol = procSampleDataObj(p);
         return resultCol;
     }
