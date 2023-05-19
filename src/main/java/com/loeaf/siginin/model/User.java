@@ -1,5 +1,6 @@
 package com.loeaf.siginin.model;
 
+import com.loeaf.ivfm.model.Recommand;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,13 +17,14 @@ import java.util.List;
 public class User {
     @Id
     @Column
-//    @BizField(bizKey = true, order = 0)
     private String id;
     @Column
     private String nickName;
-//    @ManyToMany
-//    @JoinTable(name = "user_role",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Set<Role> roles;
+    // 내가 추천한 사람들 목록
+    @OneToMany(mappedBy = "fromUser", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Recommand> fromUserRecommand;
+    // 나를 추천 한 사람들 목록
+    @OneToMany(mappedBy = "toUser", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Recommand> toUserRecommand;
+
 }

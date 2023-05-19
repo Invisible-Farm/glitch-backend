@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/init")
+@RequestMapping("/incense")
 public class InitController {
     @Autowired
     private IncenseService incenseService;
 
 
-    @PostMapping("/incense")
+    @PostMapping("/init")
     public ResponseEntity<Object> InitIncense(HttpServletRequest request) throws IOException {
         List<Incense> incenses = new ArrayList<>();
         AbsDataParserService absDataParserService = new AbsDataParserService() {
@@ -34,21 +34,20 @@ public class InitController {
                 for (int i = 0; i < parseDatas.size(); i++) {
                     List<String> parseData = parseDatas.get(i);
                     parseData.get(0);
-                    parseData.get(1);
-                    Incense incense = new Incense(UUID.randomUUID().toString(), parseData.get(0), parseData.get(1));
+                    Incense incense = new Incense(UUID.randomUUID().toString(), parseData.get(0));
                     incenses.add(incense);
                 }
                 return incenses;
             }
         };
-        List<Incense> incenseList = absDataParserService.procParseFile("incense.csv");
+        List<Incense> incenseList = absDataParserService.procParseFile("Incense.csv");
         for (Incense o : incenseList) {
             incenseService.regist(o);
         }
         return ResponseEntity.ok(1);
     }
 
-    @GetMapping("/incense")
+    @GetMapping("")
     public ResponseEntity<ResResult> GetIncense(HttpServletRequest request) throws IOException {
         List<Incense> incenses = incenseService.findAll();
         return ResponseEntity.ok(new ResResult(incenses));

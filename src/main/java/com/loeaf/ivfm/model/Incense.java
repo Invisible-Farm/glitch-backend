@@ -1,12 +1,13 @@
 package com.loeaf.ivfm.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.loeaf.siginin.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity(name = "Incense")
@@ -19,4 +20,12 @@ public class Incense {
     private String name;
     @Column
     private String korName;
+    // 추천 인센스
+    @OneToMany(mappedBy = "incense", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<RecommandIncense> recommandIncenses;
+    public Incense(String id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
 }
