@@ -20,6 +20,8 @@ public class Incense {
     private String name;
     @Column
     private String korName;
+    @Column
+    private String useYn;
     // 추천 인센스
     @OneToMany(mappedBy = "incense", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RecommandIncense> recommandIncenses;
