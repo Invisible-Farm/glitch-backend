@@ -154,7 +154,7 @@ public class InitController {
                     instance.setFileName(incesnseFileName);
                     instance.setFilePath("/IVFN/proofOfValue/sumnail");
                     instance.setFileUrlPath("https://dhk.ha.nso.li/IVFN/proofOfValue/sumnail"+"/"+incesnseFileName);
-                    instance.setFileInfoType(FileInfoType.VIDEO);
+                    instance.setFileInfoType(FileInfoType.IMAGE);
                     instance.setFileInfoSubType(FileInfoSubType.PROOFOFVALUE);
                     obj.add(instance);
                 }
