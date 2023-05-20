@@ -5,6 +5,7 @@ import com.loeaf.common.domain.Domain;
 import com.loeaf.common.misc.Action;
 import com.loeaf.file.domain.listener.FileInfoListener;
 import com.loeaf.ivfm.model.Incense;
+import com.loeaf.ivfm.model.NftType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,6 +57,17 @@ public class FileInfo extends Domain implements Action {
      */
     @Column(name = "origin_file_name")
     private String originFileName;
+
+    /**
+     * NFT 발행 시 종류
+     */
+    @Column(name = "nft_type")
+    private NftType nftType;
+    /**
+     * NFT 토큰값
+     */
+    @Column(name = "nftToken")
+    private String nftToken;
 
     /**
      * 확장자

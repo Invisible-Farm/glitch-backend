@@ -50,7 +50,6 @@ public class InitController {
         return ResponseEntity.ok(1);
     }
 
-
     @PostMapping("/community")
     public ResponseEntity<Object> InitCommnit(HttpServletRequest request) throws IOException {
         AbsDataParserService absDataParserService = new AbsDataParserService() {

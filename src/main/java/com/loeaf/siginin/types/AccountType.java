@@ -5,7 +5,8 @@ public enum AccountType {
     FACEBOOK("FACEBOOK"),
     TWITTER("TWITTER"),
     GOOGLE("GOOGLE"),
-    KAKAO("KAKAO");
+    KAKAO("KAKAO"),
+    WALLET("WALLET");
 
     private String value;
 

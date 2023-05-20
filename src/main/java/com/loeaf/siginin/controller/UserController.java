@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping("/signUp")
     public ResponseEntity<ResResult> signUp(HttpServletRequest request,
                                             @RequestBody UserParam userForm) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        var result = sigininService.signUp(userForm);
+        String result = sigininService.signUp(userForm);
         return ResponseEntity.ok(new ResResult(result));
     }
 

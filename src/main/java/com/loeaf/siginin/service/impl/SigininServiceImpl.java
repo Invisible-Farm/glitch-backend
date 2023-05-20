@@ -35,7 +35,7 @@ public class SigininServiceImpl implements SigininService {
 
 
     @Transactional
-    public User save(UserParam userParam) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    public Account save(UserParam userParam) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
 //        checkDuplication(userParam);
         User user = new User();
 //        Set<Role> roles = new HashSet<>();
@@ -43,21 +43,22 @@ public class SigininServiceImpl implements SigininService {
 //        user.setRoles(roles);
         user.setId(UUID.randomUUID().toString());
         user.setNickName(userParam.getNickName());
-        var userObj = userService.regist(user);
+        User userObj = userService.regist(user);
         Account account = new Account();
         account.setType(AccountType.valueOf(userParam.getAccountType()));
         account.setId(UUID.randomUUID().toString());
         account.setLoginId(userParam.getLoginId());
-        account.setPassword(passwordEncoder.encode(userParam.getPassword()));
+        if(userParam.getAccountType().equals("EMAIL")) {
+            account.setPassword(passwordEncoder.encode(userParam.getPassword()));
+        }
         account.setUser(userObj);
-        var accountObj = accountService.regist(account);
-        accountObj.setPassword(null);
-        return user;
+        Account accountResult = accountService.regist(account);
+        return accountResult;
     }
 
     public String signUp(UserParam userParam) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        var account = this.save(userParam);
-        return jwtManager.generateJwtToken(account);
+        Account account = this.save(userParam);
+        return jwtManager.generateJwtToken(account.getUser());
     }
 
     @SneakyThrows
