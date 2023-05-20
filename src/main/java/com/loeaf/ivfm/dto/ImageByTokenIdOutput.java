@@ -12,4 +12,5 @@ public class ImageByTokenIdOutput {
     String incense;
     String community;
     String story;
+    String name;
 }

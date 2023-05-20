@@ -46,6 +46,7 @@ public class DefaultController {
         ImageByTokenIdOutput imageByTokenIdOutput = new ImageByTokenIdOutput();
         imageByTokenIdOutput.setImage(incenses.get(0).getFileUrlPath());
         imageByTokenIdOutput.setImage(incenses.get(0).getFileUrlPath());
+        imageByTokenIdOutput.setName(incenses.get(0).getSymbol()+"#"+incenses.get(0).getTokenId());
         var p = incenses.get(0).getIncense();
         imageByTokenIdOutput.setIncense(p.getName());
         return ResponseEntity.ok(imageByTokenIdOutput);
