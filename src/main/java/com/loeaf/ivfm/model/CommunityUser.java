@@ -10,21 +10,20 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Entity(name = "Community")
+@Entity(name = "CommunityUser")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Community {
+public class CommunityUser {
     @Id
     private String id;
 
-    @Column
-    String name;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    @JsonBackReference
+    private User user;
 
-    @OneToMany(mappedBy = "community", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CommunityUser> communityUsers;
-
-    public Community(String id, String name){
-        this.id = id;
-        this.name = name;
-    }
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    @JsonBackReference
+    private Community community;
 }
