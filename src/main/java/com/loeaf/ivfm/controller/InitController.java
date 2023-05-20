@@ -1,6 +1,5 @@
 package com.loeaf.ivfm.controller;
 
-import com.loeaf.common.domain.ResResult;
 import com.loeaf.file.domain.FileInfo;
 import com.loeaf.file.domain.FileInfoSubType;
 import com.loeaf.file.domain.FileInfoType;
@@ -13,7 +12,6 @@ import com.loeaf.ivfm.service.IncenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,7 +33,7 @@ public class InitController {
 
 
     @PostMapping("/incense")
-    public ResponseEntity<Object> InitIncense(HttpServletRequest request) throws IOException {
+    public ResponseEntity<Object> InitIncense() throws IOException {
         AbsDataParserService absDataParserService = new AbsDataParserService() {
             @Override
             protected List procSampleDataObj(ArrayList<List<String>> parseDatas) {
