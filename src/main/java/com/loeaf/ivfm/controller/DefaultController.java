@@ -29,10 +29,14 @@ public class DefaultController {
     @GetMapping("/{nftType}/{tokenId}")
     public ResponseEntity<ImageByTokenIdOutput> getImageByTokenId(@PathVariable("nftType")String nftType, @PathVariable("tokenId")String tokenId) throws IOException {
         System.out.println(nftType);
-        FileInfo incenses = fileInfoService.findByTokenId(tokenId);
+        List<FileInfo> incenses = fileInfoService.findByTokenId(tokenId);
+        if (incenses == null) {
+            return ResponseEntity.ok(new ImageByTokenIdOutput());
+        }
         ImageByTokenIdOutput imageByTokenIdOutput = new ImageByTokenIdOutput();
-        imageByTokenIdOutput.setImage(incenses.getFileUrlPath());
-        var p = incenses.getIncense();
+        imageByTokenIdOutput.setImage(incenses.get(0).getFileUrlPath());
+        imageByTokenIdOutput.setImage(incenses.get(0).getFileUrlPath());
+        var p = incenses.get(0).getIncense();
         imageByTokenIdOutput.setIncense(p.getName());
         return ResponseEntity.ok(imageByTokenIdOutput);
     }

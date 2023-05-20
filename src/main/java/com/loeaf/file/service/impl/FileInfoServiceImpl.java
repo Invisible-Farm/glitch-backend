@@ -6,7 +6,6 @@ import com.loeaf.config.S3Config;
 import com.loeaf.file.domain.FileInfo;
 import com.loeaf.file.persistence.FileInfoRepository;
 import com.loeaf.file.service.FileInfoService;
-import com.loeaf.ivfm.model.Incense;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
@@ -203,7 +201,7 @@ public class FileInfoServiceImpl
     }
 
     @Override
-    public FileInfo findByTokenId(String tokenId) {
+    public List<FileInfo> findByTokenId(String tokenId) {
         return this.jpaRepo.findByTokenId(tokenId);
     }
 

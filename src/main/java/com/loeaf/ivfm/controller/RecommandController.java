@@ -15,6 +15,7 @@ import com.loeaf.siginin.service.AccountService;
 import com.loeaf.siginin.service.SigininService;
 import com.loeaf.siginin.service.UserService;
 import com.loeaf.siginin.types.AccountType;
+import com.loeaf.siginin.util.HttpUtile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FilenameFilter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -115,7 +118,12 @@ public class RecommandController {
         profOfValueSumnailRepleFile.setRecommandIncense(recommandVal);
         profOfValueSumnailRepleFile.setIncense(incense);
         fileInfoService.regist(profOfValueSumnailRepleFile);
-
+        Map<String, Object> param = new HashMap<>();
+        param.put("fileInfoId", incenseRepleFile.getId());
+        param.put("name", "PSBY");
+        param.put("recipient", "0xfD71c28bb8aDe8970a6343cd255dff6899fDA1aD");
+        param.put("symbol", "PSBY");
+        HttpUtile.postJsonResponse("http://3.26.13.71:4000/polygon/mint", param, HashMap.class);
         // 5-2. Movie 파일
         // 5-3. Movie Sumnail 파일
         // 5-4. Certification 파일

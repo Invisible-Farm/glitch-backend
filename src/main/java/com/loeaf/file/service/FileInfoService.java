@@ -12,5 +12,5 @@ public interface FileInfoService extends Service<FileInfo, String> {
     List<FileInfo> procCPFiles(MultipartFile[] multipartFiles);
     void sendS3Files() throws IOException;
 
-    FileInfo findByTokenId(String tokenId);
+    List<FileInfo> findByTokenId(String tokenId);
 }
