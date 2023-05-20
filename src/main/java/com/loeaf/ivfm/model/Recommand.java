@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -27,6 +28,9 @@ public class Recommand {
 
     @Column(columnDefinition = "TEXT", length = 65535)
     String stroy;
+
+    @Column()
+    Date registDate;
 
     // 추천 하는 사람
     @ManyToOne

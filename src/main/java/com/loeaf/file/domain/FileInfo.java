@@ -6,6 +6,7 @@ import com.loeaf.common.misc.Action;
 import com.loeaf.file.domain.listener.FileInfoListener;
 import com.loeaf.ivfm.model.Incense;
 import com.loeaf.ivfm.model.NftType;
+import com.loeaf.ivfm.model.RecommandIncense;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.File;
+import java.util.List;
 
 /**
  * 파일에 대한 기본 정보를 구현하는 Model
@@ -90,6 +92,11 @@ public class FileInfo implements Action {
     @JoinColumn(referencedColumnName = "id")
     @JsonBackReference
     private Incense incense;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    @JsonBackReference
+    private RecommandIncense recommandIncense;
 
     @Column
     private FileInfoType fileInfoType;

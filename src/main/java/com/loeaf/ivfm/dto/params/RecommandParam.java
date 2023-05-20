@@ -11,7 +11,10 @@ public class RecommandParam {
     String communityId;
     String from;
     String to;
-    String incense;
+    String incenseUuid;
+    String incenseImgUuid;
+    String profOfValueUuid;
+    String profOfValueSumnailUuid;
+    String story;
     String myResponse;
-    String Stroy;
 }
