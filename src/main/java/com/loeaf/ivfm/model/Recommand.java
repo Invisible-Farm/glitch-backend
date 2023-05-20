@@ -19,6 +19,14 @@ public class Recommand {
     @Id
     private String id;
 
+    @Column
+    String Community;
+
+    @Column
+    String valueCreated;
+
+
+
     // 추천 하는 사람
     @ManyToOne
     @JoinColumn(referencedColumnName = "id", name = "from_user_id")
