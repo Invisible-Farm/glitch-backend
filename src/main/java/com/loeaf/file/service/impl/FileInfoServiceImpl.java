@@ -6,6 +6,7 @@ import com.loeaf.config.S3Config;
 import com.loeaf.file.domain.FileInfo;
 import com.loeaf.file.persistence.FileInfoRepository;
 import com.loeaf.file.service.FileInfoService;
+import com.loeaf.ivfm.model.Incense;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
@@ -199,6 +200,11 @@ public class FileInfoServiceImpl
         file.createNewFile();
 //        AmazonS3Client s3Client = s3Config.amazonS3Client();
 //        s3Client.putObject("bucket", file.getName(), file);
+    }
+
+    @Override
+    public FileInfo findByTokenId(String tokenId) {
+        return this.jpaRepo.findByTokenId(tokenId);
     }
 
 }
