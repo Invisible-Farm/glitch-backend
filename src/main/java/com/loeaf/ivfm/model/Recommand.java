@@ -20,12 +20,13 @@ public class Recommand {
     private String id;
 
     @Column
-    String Community;
-
-    @Column
     String valueCreated;
 
+    @Column
+    String myResponse;
 
+    @Column(columnDefinition = "TEXT", length = 65535)
+    String stroy;
 
     // 추천 하는 사람
     @ManyToOne

@@ -1,6 +1,7 @@
 package com.loeaf.ivfm.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.loeaf.file.domain.FileInfo;
 import com.loeaf.siginin.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Incense {
+    public Incense(String id, String name){
+        this.id = id;
+        this.name = name;
+    }
     @Id
     private String id;
     @Column
@@ -25,9 +30,7 @@ public class Incense {
     // 추천 인센스
     @OneToMany(mappedBy = "incense", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RecommandIncense> recommandIncenses;
-    public Incense(String id, String name){
-        this.id = id;
-        this.name = name;
-    }
 
+    @OneToMany(mappedBy = "incense", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FileInfo> fileInfos;
 }

@@ -1,17 +1,16 @@
 package com.loeaf.file.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.loeaf.common.domain.Domain;
 import com.loeaf.common.misc.Action;
 import com.loeaf.file.domain.listener.FileInfoListener;
+import com.loeaf.ivfm.model.Incense;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 
@@ -29,20 +28,23 @@ public class FileInfo extends Domain implements Action {
     /**
      * 파일명
      */
-    @NotNull
     @Column(name = "file_name")
     private String fileName;
 
     /**
      * 파일을 읽을때 식별하기 위한 폴더
      */
-    @NotNull
     @Column(name = "file_path")
     private String filePath;
+
+    @Column(name = "file_url_path")
+    private String fileUrlPath;
+
+    @Column(name = "file_type")
+    private String fileType;
     /**
      * 임시로 파일을 떨어틀어놓을 경로
      */
-    @NotNull
     private String tmpPath;
     /**
      * home에서 부터 target까지의 경로
@@ -52,20 +54,29 @@ public class FileInfo extends Domain implements Action {
     /**
      * 파일경로
      */
-    @NotNull
     @Column(name = "origin_file_name")
     private String originFileName;
 
     /**
      * 확장자
      */
-    @NotNull
     @Column(name = "file_ext")
     private String fileExtention;
 
     private String smallFileName;
 
     private String NormalFileName;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    @JsonBackReference
+    private Incense incense;
+
+    @Column
+    private FileInfoType fileInfoType;
+
+    @Column
+    private FileInfoSubType fileInfoSubType;
 
     @Override
     public String toString() {
