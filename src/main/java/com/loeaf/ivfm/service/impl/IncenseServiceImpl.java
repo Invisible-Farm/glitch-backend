@@ -20,4 +20,9 @@ public class IncenseServiceImpl
     private void init() {
         super.set(jpaRepo, new Incense());
     }
+
+    @Override
+    public Incense findByIncenseType(String incesnseType) {
+        return jpaRepo.findByName(incesnseType);
+    }
 }

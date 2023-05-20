@@ -25,7 +25,9 @@ import java.io.File;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileInfo extends Domain implements Action {
+public class FileInfo implements Action {
+    @Id
+    private String id;
     /**
      * 파일명
      */
@@ -61,13 +63,18 @@ public class FileInfo extends Domain implements Action {
     /**
      * NFT 발행 시 종류
      */
-    @Column(name = "nft_type")
-    private NftType nftType;
+    @Column(name = "symbol")
+    private NftType symbol;
     /**
      * NFT 토큰값
      */
     @Column(name = "nftToken")
-    private String nftToken;
+    private String tokenId;
+    /**
+     * NFT 토큰값
+     */
+    @Column(name = "txHash")
+    private String txHash;
 
     /**
      * 확장자

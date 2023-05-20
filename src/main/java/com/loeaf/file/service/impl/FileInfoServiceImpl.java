@@ -35,7 +35,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class FileInfoServiceImpl
-        extends ServiceImpl<FileInfoRepository, FileInfo, Long>
+        extends ServiceImpl<FileInfoRepository, FileInfo, String>
         implements FileInfoService {
     private final FileInfoRepository jpaRepo;
     private final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());

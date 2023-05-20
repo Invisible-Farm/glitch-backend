@@ -1,7 +1,11 @@
 package com.loeaf.ivfm.controller;
 
 import com.loeaf.common.domain.ResResult;
+import com.loeaf.file.domain.FileInfo;
+import com.loeaf.file.domain.FileInfoSubType;
+import com.loeaf.file.domain.FileInfoType;
 import com.loeaf.file.service.AbsDataParserService;
+import com.loeaf.file.service.FileInfoService;
 import com.loeaf.ivfm.model.Community;
 import com.loeaf.ivfm.model.Incense;
 import com.loeaf.ivfm.service.CommunityService;
@@ -26,6 +30,8 @@ public class InitController {
     private IncenseService incenseService;
     @Autowired
     private CommunityService communityService;
+    @Autowired
+    private FileInfoService fileInfoService;
 
 
     @PostMapping("/incense")
@@ -68,6 +74,96 @@ public class InitController {
         List<Community> communityList = absDataParserService.procParseFile("community.csv");
         for (Community o : communityList) {
             communityService.regist(o);
+        }
+        return ResponseEntity.ok(1);
+    }
+
+    @PostMapping("/incense_img")
+    public ResponseEntity<Object> incenseImg(HttpServletRequest request) throws IOException {
+        AbsDataParserService absDataParserService = new AbsDataParserService() {
+            @Override
+            protected List procSampleDataObj(ArrayList<List<String>> parseDatas) {
+                ArrayList<FileInfo> obj = new ArrayList<>();
+                for (int i = 0; i < parseDatas.size(); i++) {
+                    List<String> parseData = parseDatas.get(i);
+                    String incesnseType = parseData.get(0);
+                    String incesnseFileName = parseData.get(1);
+                    FileInfo instance = new FileInfo();
+                    instance.setId(UUID.randomUUID().toString());
+                    instance.setIncense(incenseService.findByIncenseType(incesnseType));
+                    instance.setFileName(incesnseFileName);
+                    instance.setFilePath("/IVFN/Incense");
+                    instance.setFileUrlPath("https://dhk.ha.nso.li/IVFN/Incense"+"/"+incesnseFileName);
+                    instance.setFileInfoType(FileInfoType.IMAGE);
+                    instance.setFileInfoSubType(FileInfoSubType.INCENSE);
+                    obj.add(instance);
+                }
+                return obj;
+            }
+        };
+        List<FileInfo> communityList = absDataParserService.procParseFile("incense_img.csv");
+        for (FileInfo o : communityList) {
+            fileInfoService.regist(o);
+        }
+        return ResponseEntity.ok(1);
+    }
+
+    @PostMapping("/incense_media")
+    public ResponseEntity<Object> incenseMedia(HttpServletRequest request) throws IOException {
+        AbsDataParserService absDataParserService = new AbsDataParserService() {
+            @Override
+            protected List procSampleDataObj(ArrayList<List<String>> parseDatas) {
+                ArrayList<FileInfo> obj = new ArrayList<>();
+                for (int i = 0; i < parseDatas.size(); i++) {
+                    List<String> parseData = parseDatas.get(i);
+                    String incesnseType = parseData.get(0);
+                    String incesnseFileName = parseData.get(1);
+                    FileInfo instance = new FileInfo();
+                    instance.setId(UUID.randomUUID().toString());
+                    instance.setIncense(incenseService.findByIncenseType(incesnseType));
+                    instance.setFileName(incesnseFileName);
+                    instance.setFilePath("/IVFN/proofOfValue/media");
+                    instance.setFileUrlPath("https://dhk.ha.nso.li/IVFN/proofOfValue/media"+"/"+incesnseFileName);
+                    instance.setFileInfoType(FileInfoType.VIDEO);
+                    instance.setFileInfoSubType(FileInfoSubType.PROOFOFVALUE);
+                    obj.add(instance);
+                }
+                return obj;
+            }
+        };
+        List<FileInfo> communityList = absDataParserService.procParseFile("incense_media.csv");
+        for (FileInfo o : communityList) {
+            fileInfoService.regist(o);
+        }
+        return ResponseEntity.ok(1);
+    }
+
+    @PostMapping("/incense_sumnail")
+    public ResponseEntity<Object> incenseSumnail(HttpServletRequest request) throws IOException {
+        AbsDataParserService absDataParserService = new AbsDataParserService() {
+            @Override
+            protected List procSampleDataObj(ArrayList<List<String>> parseDatas) {
+                ArrayList<FileInfo> obj = new ArrayList<>();
+                for (int i = 0; i < parseDatas.size(); i++) {
+                    List<String> parseData = parseDatas.get(i);
+                    String incesnseType = parseData.get(0);
+                    String incesnseFileName = parseData.get(1);
+                    FileInfo instance = new FileInfo();
+                    instance.setId(UUID.randomUUID().toString());
+                    instance.setIncense(incenseService.findByIncenseType(incesnseType));
+                    instance.setFileName(incesnseFileName);
+                    instance.setFilePath("/IVFN/proofOfValue/sumnail");
+                    instance.setFileUrlPath("https://dhk.ha.nso.li/IVFN/proofOfValue/sumnail"+"/"+incesnseFileName);
+                    instance.setFileInfoType(FileInfoType.VIDEO);
+                    instance.setFileInfoSubType(FileInfoSubType.PROOFOFVALUE);
+                    obj.add(instance);
+                }
+                return obj;
+            }
+        };
+        List<FileInfo> communityList = absDataParserService.procParseFile("incense_media_sumnail.csv");
+        for (FileInfo o : communityList) {
+            fileInfoService.regist(o);
         }
         return ResponseEntity.ok(1);
     }
