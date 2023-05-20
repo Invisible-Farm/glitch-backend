@@ -6,6 +6,7 @@ import com.loeaf.config.S3Config;
 import com.loeaf.file.domain.FileInfo;
 import com.loeaf.file.persistence.FileInfoRepository;
 import com.loeaf.file.service.FileInfoService;
+import com.loeaf.ivfm.model.NftType;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
@@ -201,8 +202,8 @@ public class FileInfoServiceImpl
     }
 
     @Override
-    public List<FileInfo> findByTokenId(String tokenId) {
-        return this.jpaRepo.findByTokenId(tokenId);
+    public List<FileInfo> findByTokenId(String tokenId, NftType nftTypeInfo) {
+        return this.jpaRepo.findByTokenIdAndSymbol(tokenId, nftTypeInfo);
     }
 
 }

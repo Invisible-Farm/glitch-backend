@@ -6,6 +6,7 @@ import com.loeaf.file.domain.FileInfo;
 import com.loeaf.file.service.FileInfoService;
 import com.loeaf.ivfm.dto.ImageByTokenIdOutput;
 import com.loeaf.ivfm.model.Incense;
+import com.loeaf.ivfm.model.NftType;
 import com.loeaf.ivfm.service.IncenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,16 @@ public class DefaultController {
     @GetMapping("/{nftType}/{tokenId}")
     public ResponseEntity<ImageByTokenIdOutput> getImageByTokenId(@PathVariable("nftType")String nftType, @PathVariable("tokenId")String tokenId) throws IOException {
         System.out.println(nftType);
-        List<FileInfo> incenses = fileInfoService.findByTokenId(tokenId);
+        NftType nftTypeInfo = NftType.GFT;
+        if(nftType.equals("PSBT")){
+            nftTypeInfo = NftType.PSBT;
+        } else if(nftType.equals("IFT")){
+            nftTypeInfo = NftType.IFT;
+        } else {
+            nftTypeInfo = NftType.GFT;
+
+        }
+        List<FileInfo> incenses = fileInfoService.findByTokenId(tokenId, nftTypeInfo);
         if (incenses == null) {
             return ResponseEntity.ok(new ImageByTokenIdOutput());
         }
